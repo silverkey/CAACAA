@@ -1,0 +1,29 @@
+nohup tophat --GTF genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf --transcriptome-index=transcriptome_data/known --num-threads 2 --max-intron-length 10000 --b2-very-fast genome/tp_no_rm_e17 SRR090443.fastq,SRR090445.fastq,SRR090447.fastq,SRR401385.fastq,SRR401387.fastq,SRR401389.fastq,SRR090444.fastq,SRR090446.fastq,SRR401384.fastq,SRR401386.fastq,SRR401388.fastq &
+
+
+
+
+nohup tophat --GTF genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf --transcriptome-index=transcriptome_data/known --num-threads 2 --max-intron-length 10000 genome/tp_no_rm_e17 SRR090443.fastq,SRR090445.fastq,SRR090447.fastq,SRR401385.fastq,SRR401387.fastq,SRR401389.fastq,SRR090444.fastq,SRR090446.fastq,SRR401384.fastq,SRR401386.fastq,SRR401388.fastq &
+
+nohup cufflinks --output-dir cufflinks_out --GTF-guide genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf --max-intron-length 10000 --num-threads 3 tophat_out/accepted_hits.bam > cufflinks.nohup &
+
+nohup cuffcompare -r genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf cufflinks_out/transcripts.gtf > cuffcompare.nohup &
+
+nohup cuffmerge --ref-gtf genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf --num-threads 3 gtflist > cuffmerge.nohup &
+
+nohup samtools index tophat_out/accepted_hits.bam tophat_out/accepted_hits.bai > samtoosindex.nohup &
+
+
+
+
+nohup tophat --GTF genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf --transcriptome-index=transcriptome_data/known --num-threads 2 --max-intron-length 10000 --b2-very-sensitive genome/tp_no_rm_e17 SRR090443.fastq,SRR090445.fastq,SRR090447.fastq,SRR401385.fastq,SRR401387.fastq,SRR401389.fastq,SRR090444.fastq,SRR090446.fastq,SRR401384.fastq,SRR401386.fastq,SRR401388.fastq > tophat.nohup &
+
+nohup cufflinks --output-dir cufflinks_out --multi-read-correct --min-isoform-fraction 50 --pre-mrna-fraction 50 --max-intron-length 10000 --min-frags-per-transfrag 50 --overlap-radius 5
+--GTF-guide genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf --max-intron-length 10000 --num-threads 3 tophat_out/accepted_hits.bam > cufflinks.nohup &
+
+nohup cuffcompare -r genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf cufflinks_out/transcripts.gtf > cuffcompare.nohup &
+
+nohup cuffmerge --ref-gtf genome/Thalassiosira_pseudonana.ASM14940v1.17.gtf --num-threads 3 gtflist > cuffmerge.nohup &
+
+nohup samtools index tophat_out/accepted_hits.bam tophat_out/accepted_hits.bai > samtoosindex.nohup &
+
